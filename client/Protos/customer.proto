@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option csharp_namespace = "client.Protos";
+
+package customer;
+
+message Customer
+{
+  int32 Id = 1;
+  string Name = 2;
+  string Email = 3;
+}
+
+service CustomerService
+{
+  rpc CreateCustomer (Customer) returns (Customer);
+  rpc UpdateCustomer (Customer) returns (Customer);
+  rpc DeleteCustomer (Customer) returns (CustomerSuccessResponse);
+  rpc GetCustomerById (CustomerByIdRequest) returns (Customer);
+  rpc GetAllCustomers (CustomerEmptyRequest) returns (CustomersResponse);
+}
+
+message CustomerByIdRequest
+{
+  int32 id = 1;
+}
+
+message CustomerEmptyRequest
+{
+
+}
+
+message CustomerSuccessResponse
+{
+  bool success = 1;
+}
+
+message CustomersResponse
+{
+  repeated Customer customers = 1;
+}
